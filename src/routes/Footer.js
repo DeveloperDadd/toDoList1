@@ -1,15 +1,17 @@
 import React from 'react';
 
-export default function Footer() {
+export default function Footer({ count, all, active, completed, clearCompleted}) {
     return(
         <>
-            <p>Count</p>
             <div>
-            <button className='btn'>All</button>
-            <button className='btn'>Active</button>
-            <button className='btn'>Completed</button>
+                <p>{count}</p>
+                <div>
+                <button className='btn btn-primary'>{all}</button>
+                <button className='btn btn-primary'>{active}</button>
+                <button className='btn btn-primary'>{completed}</button>
+                </div>
+                <button className='btn btn-danger'>{clearCompleted}</button>
             </div>
-            <button></button>
         </>
     )
 }
