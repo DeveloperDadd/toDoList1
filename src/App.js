@@ -19,6 +19,7 @@ function App() {
       let tempTasks = [...tasks, task];
       setTasks(tempTasks);
       setTempData("");
+      e.target.value = "";
     }
 }
 
@@ -32,7 +33,7 @@ function App() {
     <>
     <Heading title="TODOS"/>
     <div className='container-sm border border-dark'>
-      <Task placeholder={tempData} handleKeyDown={handleKeyDown} />
+      <Task placeholder={taskPlaceholder.text} handleKeyDown={handleKeyDown} />
       <Footer count={`${tasks.length} items left`} all={footer[1][0]} active={footer[1][1]} completed={footer[1][2]} clearCompleted={footer[1][3]}/>
     </div>
     </>
