@@ -8,7 +8,9 @@ function App() {
   let count = tasks.length;
   const [display, setDisplay] = useState([tasks]);
 
-  
+  const onAll = () => {
+    
+  };
 
   const footer = [count, ['All', 'Active', 'Completed','Clear Completed']];
 
