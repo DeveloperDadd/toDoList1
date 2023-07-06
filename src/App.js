@@ -1,12 +1,15 @@
 import Heading from './routes/Heading';
 import Task from './routes/Task';
 import Footer from './routes/Footer';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Tasklist from './routes/Tasklist';
 
 function App() {
   
   const [tasks, setTasks] = useState([]);
   const [tempData, setTempData] = useState("");
+  const [filteredTasks, setFilteredTasks] = useState([]);
+  const [page, setPage] = useState("1")
 
   const handleKeyDown = (e) => {
     setTempData(e.target.value);
@@ -14,7 +17,7 @@ function App() {
       const task = {
         text : tempData,
         id : Date.now(),
-        active : true
+        isActive : true
       }
       let tempTasks = [...tasks, task];
       setTasks(tempTasks);
@@ -23,18 +26,39 @@ function App() {
     }
 }
 
+  useEffect (() => {
+    if (page === "1") {
+      setFilteredTasks(tasks);
+    } 
+  }, [tasks])
+
+  function setTasksAll(e) {
+    setFilteredTasks(tasks);
+  }
+
+  function setTasksActive(e) {
+    const active = tasks.filter(task=> task.isActive === true)
+    setPage("2");
+    setFilteredTasks(active);
+  }
+
+  function setTasksCompleted(e) {
+    const completed = tasks.filter(task=> task.isActive === false)
+    setPage("3");
+    setFilteredTasks(completed);
+  }
+
   const taskPlaceholder = {
     text : 'Enter a task to be completed'
   }
-  
-  const footer = [tasks.length, ['All', 'Active', 'Completed','Clear Completed']];
 
   return (
     <>
     <Heading title="TODOS"/>
     <div className='container-sm border border-dark'>
       <Task placeholder={taskPlaceholder.text} handleKeyDown={handleKeyDown} />
-      <Footer count={`${tasks.length} items left`} all={footer[1][0]} active={footer[1][1]} completed={footer[1][2]} clearCompleted={footer[1][3]}/>
+      <Tasklist filteredTasks={filteredTasks} />
+      <Footer count={`${tasks.length} items left`} setAll={setTasksAll} setActive={setTasksActive} setComplete={setTasksCompleted} />
     </div>
     </>
   );
