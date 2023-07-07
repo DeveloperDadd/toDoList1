@@ -28,8 +28,12 @@ function App() {
 
   useEffect (() => {
     if (page === "1") {
-      setFilteredTasks(tasks);
-    } 
+      setTasksAll();
+    } else if (page === "2") {
+      setTasksActive();
+    } else {
+      setTasksCompleted();
+    }
   }, [tasks])
 
   function setTasksAll(e) {
@@ -48,6 +52,12 @@ function App() {
     setFilteredTasks(completed);
   }
 
+  function deleteTask(id) {
+    setTasks(tasks => {
+      return tasks.filter(task => task.id !== id);
+    })
+  }
+
   const taskPlaceholder = {
     text : 'Enter a task to be completed'
   }
@@ -57,7 +67,7 @@ function App() {
     <Heading title="TODOS"/>
     <div className='container-sm border border-dark'>
       <Task placeholder={taskPlaceholder.text} handleKeyDown={handleKeyDown} />
-      <Tasklist filteredTasks={filteredTasks} />
+      <Tasklist filteredTasks={filteredTasks} deleteTask={deleteTask}/>
       <Footer count={`${tasks.length} items left`} setAll={setTasksAll} setActive={setTasksActive} setComplete={setTasksCompleted} />
     </div>
     </>
