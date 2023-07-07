@@ -52,6 +52,21 @@ function App() {
     setFilteredTasks(completed);
   }
 
+<<<<<<< HEAD
+=======
+  function markComplete(id) {
+    setTasks(currentTasks => {
+      return currentTasks.map(task => {
+        if (task.id === id) {
+          task.isActive = false;
+        }
+        return task
+      })
+    })
+  }
+
+
+>>>>>>> dev
   function deleteTask(id) {
     setTasks(tasks => {
       return tasks.filter(task => task.id !== id);
@@ -67,7 +82,11 @@ function App() {
     <Heading title="TODOS"/>
     <div className='container-sm border border-dark'>
       <Task placeholder={taskPlaceholder.text} handleKeyDown={handleKeyDown} />
+<<<<<<< HEAD
       <Tasklist filteredTasks={filteredTasks} deleteTask={deleteTask}/>
+=======
+      <Tasklist filteredTasks={filteredTasks} deleteTask={deleteTask} markComplete={markComplete}/>
+>>>>>>> dev
       <Footer count={`${tasks.length} items left`} setAll={setTasksAll} setActive={setTasksActive} setComplete={setTasksCompleted} />
     </div>
     </>
