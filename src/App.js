@@ -23,6 +23,7 @@ function App() {
       setTasks(tempTasks);
       setTempData("");
       e.target.value = "";
+      setPage(page);
     }
 }
 
@@ -47,30 +48,36 @@ function App() {
   }
 
   function setTasksCompleted(e) {
-    const completed = tasks.filter(task=> task.isActive === false)
-    setPage("3");
+    const completed = tasks.filter(task=> task.isActive === false);
     setFilteredTasks(completed);
   }
 
-<<<<<<< HEAD
-=======
   function markComplete(id) {
     setTasks(currentTasks => {
       return currentTasks.map(task => {
-        if (task.id === id) {
+        if (task.id === id && task.isActive === true) {
           task.isActive = false;
+        } else if (task.id === id && task.isActive === false) {
+          task.isActive = true;
         }
         return task
       })
     })
+    setPage(page);
   }
 
 
->>>>>>> dev
   function deleteTask(id) {
     setTasks(tasks => {
       return tasks.filter(task => task.id !== id);
     })
+  }
+
+  function clearCompleted() {
+    let notCompleted = tasks.filter(task => task.isActive === true);
+    setTasks(notCompleted);
+    setPage("1")
+    console.log("All completed tasks have been cleared")
   }
 
   const taskPlaceholder = {
@@ -82,12 +89,8 @@ function App() {
     <Heading title="TODOS"/>
     <div className='container-sm border border-dark'>
       <Task placeholder={taskPlaceholder.text} handleKeyDown={handleKeyDown} />
-<<<<<<< HEAD
-      <Tasklist filteredTasks={filteredTasks} deleteTask={deleteTask}/>
-=======
       <Tasklist filteredTasks={filteredTasks} deleteTask={deleteTask} markComplete={markComplete}/>
->>>>>>> dev
-      <Footer count={`${tasks.length} items left`} setAll={setTasksAll} setActive={setTasksActive} setComplete={setTasksCompleted} />
+      <Footer count={`${tasks.length} items left`} setAll={setTasksAll} setActive={setTasksActive} setComplete={setTasksCompleted} clearCompleted={clearCompleted}/>
     </div>
     </>
   );
