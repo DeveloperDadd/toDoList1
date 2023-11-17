@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default function Container() {
-    return <div className='container-sm border border-dark'></div>
+    return <div id="main-container"></div>
 }

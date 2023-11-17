@@ -2,14 +2,22 @@ import React from 'react';
 
 export default function Footer({ count, clearCompleted, setAll, setActive, setComplete }) {
     return(
-    <div className='d-flex align-items-center justify-content-around'>
-        <p className='m-4'>{count}</p>
-        <div>
-        <button onClick={setAll} className='btn btn-primary m-1'>All</button>
-        <button onClick={setActive} className='btn btn-primary m-1'>Active</button>
-        <button onClick={setComplete} className='btn btn-primary m-1'>Completed</button>
-        </div>
-        <button onClick={clearCompleted} className='btn btn-danger m-4'>Clear Completed</button>
+    <div className='row my-4'>
+    <div className='col-2'>
+    <p className='col-xs-2 text-center'>{count}</p>
+    </div>
+    <div className='col-2'>
+    <button onClick={setAll} className='btn btn-primary btn-sm col-xs-2'>All</button>
+    </div>    
+    <div className='col-2'>
+    <button onClick={setActive} className='btn btn-primary btn-sm col-xs-2'>Active</button>
+    </div>    
+    <div className='col-2'>
+    <button onClick={setComplete} className='btn btn-primary btn-sm col-xs-2'>Completed</button>
+    </div>    
+    <div className='col-2'>
+    <button onClick={clearCompleted} className='btn btn-danger btn-sm col-xs-4'>Clear Completed</button>
+    </div>     
     </div>
     )
 }

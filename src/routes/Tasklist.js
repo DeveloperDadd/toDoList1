@@ -44,7 +44,7 @@ export default function Tasklist ({ filteredTasks, deleteTask, markComplete, han
          {filteredTasks.map(task => {return (<li key={task.id} className='list-group-item d-flex justify-content-between align-items-center'>
             <input type="checkbox" checked={!task.isActive} isActive={task.isActive} onChange={e => markComplete(task.id, e.target.check)} className='form-check-input'></input>
             
-            <div onDoubleClick={() => handleDoubleClick(task.id)}>
+            <div className="col-8" onDoubleClick={() => handleDoubleClick(task.id)}>
                 {editingTaskId === task.id ? (
                     <input
                         type='text'
@@ -54,14 +54,17 @@ export default function Tasklist ({ filteredTasks, deleteTask, markComplete, han
                         onBlur={handleBlur}
                     />
                 ) : (
-                    <p className='my-1'>{task.text}</p>
+                    <p className='my-1 col-8'>{task.text}</p>
                 )}
             </div>
             
 
             
-            
-            <button className='btn btn-danger' onClick={() => deleteTask(task.id)}>X</button></li>)})}
+            <div className='col-1'>
+            <button className='btn btn-danger btn-sm' onClick={() => deleteTask(task.id)}>X</button>
+            </div>
+
+            </li>)})}
          </ul>
         </div>
     )

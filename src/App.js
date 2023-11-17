@@ -85,14 +85,14 @@ function App() {
   }
 
   return (
-    <>
+    <div className='container-fluid'>
     <Heading title="TODOS"/>
-    <div className='container-sm border border-dark'>
+    <div id="main-container">
       <Task placeholder={taskPlaceholder.text} handleKeyDown={handleKeyDown} />
       <Tasklist filteredTasks={filteredTasks} deleteTask={deleteTask} markComplete={markComplete}/>
       <Footer count={`${tasks.length} items left`} setAll={setTasksAll} setActive={setTasksActive} setComplete={setTasksCompleted} clearCompleted={clearCompleted}/>
     </div>
-    </>
+    </div>
   );
 }
 
