@@ -14,6 +14,7 @@ export default function Tasklist({ filteredTasks, deleteTask, markComplete, hand
         setText(event.target.value);
     }
 
+    // When element loses focus, invoke the updateTask function
     const handleBlur = () => {
         updateTask();
     };
@@ -25,13 +26,20 @@ export default function Tasklist({ filteredTasks, deleteTask, markComplete, hand
     }
 
     const updateTask = () => {
+        // assign the value of the task ID to the task index variable
         const taskIndex = filteredTasks.findIndex(task => task.id === editingTaskId);
+
         if (taskIndex !== -1) {
+            // create a copy of the filteredTasks
             const updatedTasks = [...filteredTasks];
+
+            //update the 'text' property of the task with the specified ID from the start of this function
             updatedTasks[taskIndex].text = text;
         }
 
+        // reset the editing task ID to null
         setEditingTaskId(null);
+        // reset the 'text' state variable to an empty string
         setText("");
     }
 

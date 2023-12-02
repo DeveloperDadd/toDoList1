@@ -37,16 +37,19 @@ function App() {
     }
   }, [tasks])
 
+  // Show all tasks in the tasks array
   function setTasksAll(e) {
     setFilteredTasks(tasks);
   }
 
+  // Show all tasks with a status of isActive = true
   function setTasksActive(e) {
     const active = tasks.filter(task=> task.isActive === true)
     setPage("2");
     setFilteredTasks(active);
   }
 
+  // Show all tasks with a status of isActive = false
   function setTasksCompleted(e) {
     const completed = tasks.filter(task=> task.isActive === false);
     setFilteredTasks(completed);
@@ -66,13 +69,14 @@ function App() {
     setPage(page);
   }
 
-
+  // return all the tasks that do not equal that task id (i.e. delete the task)
   function deleteTask(id) {
     setTasks(tasks => {
       return tasks.filter(task => task.id !== id);
     })
   }
 
+  // Reset the tasks list to the notCompleted tasks and go back to the 'first' page of the app or 'All'
   function clearCompleted() {
     let notCompleted = tasks.filter(task => task.isActive === true);
     setTasks(notCompleted);
