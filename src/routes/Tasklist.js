@@ -4,11 +4,17 @@ import { useState } from 'react';
 export default function Tasklist({ filteredTasks, deleteTask, markComplete, handleKeyDown }) {
     const [editingTaskId, setEditingTaskId] = useState(null);
     const [text, setText] = useState("");
+    const [reminder, setReminder] = useState("");
 
     const handleDoubleClick = (taskId) => {
         setEditingTaskId(taskId);
         setText(filteredTasks.find(task => task.id === taskId).text)
     };
+
+    const handleClick = (taskId) => {
+        setEditingTaskId(taskId);
+        
+    }
 
     const handleChange = (event) => {
         setText(event.target.value);
@@ -66,7 +72,7 @@ export default function Tasklist({ filteredTasks, deleteTask, markComplete, hand
                                 <p className='my-1 col-8'>{task.text}</p>
                             )}
                         </div>
-
+                        <button onClick={handleClick} className='reminder btn btn-secondary'> Add a reminder </button>
 
 
                         <div className='col-1'>

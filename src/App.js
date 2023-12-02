@@ -18,7 +18,8 @@ function App() {
       const task = {
         text : tempData,
         id : Date.now(),
-        isActive : true
+        isActive : true,
+        reminder: ""
       }
       let tempTasks = [...tasks, task];
       setTasks(tempTasks);
@@ -28,6 +29,7 @@ function App() {
     }
 }
 
+// Every time the tasks array is manipulated updated the page's state
   useEffect (() => {
     if (page === "1") {
       setTasksAll();
@@ -38,6 +40,9 @@ function App() {
     }
   }, [tasks]);
 
+
+// Every time the tasks array is manipulated, check to see the number of active tasks
+// Update the count of active items that need to be completed
   useEffect(() => {
     let count = tasks.filter(task => task.isActive === true).length;
     setNumActive(count);
@@ -90,15 +95,11 @@ function App() {
     console.log("All completed tasks have been cleared")
   }
 
-  const taskPlaceholder = {
-    text : 'Enter a task to be completed'
-  }
-
   return (
     <div className='container-fluid'>
     <Heading title="TODOS"/>
     <div id="main-container">
-      <Task placeholder={taskPlaceholder.text} handleKeyDown={handleKeyDown} />
+      <Task handleKeyDown={handleKeyDown} />
       <Tasklist filteredTasks={filteredTasks} deleteTask={deleteTask} markComplete={markComplete}/>
       <Footer count={`${numActive} items left to complete`} setAll={setTasksAll} setActive={setTasksActive} setComplete={setTasksCompleted} clearCompleted={clearCompleted}/>
     </div>
