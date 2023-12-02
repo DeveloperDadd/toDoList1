@@ -3,6 +3,7 @@ import Task from './routes/Task';
 import Footer from './routes/Footer';
 import { useState, useEffect } from 'react';
 import Tasklist from './routes/Tasklist';
+import * as dayjs from 'dayjs';
 
 function App() {
   
@@ -11,6 +12,15 @@ function App() {
   const [filteredTasks, setFilteredTasks] = useState([]);
   const [page, setPage] = useState("1");
   const [numActive, setNumActive] = useState(0);
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
+
+  useEffect(() => {
+    const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    setTasks(storedTasks);
+  }, [])
 
   const handleKeyDown = (e) => {
     setTempData(e.target.value);
