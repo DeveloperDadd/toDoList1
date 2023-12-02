@@ -9,7 +9,8 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [tempData, setTempData] = useState("");
   const [filteredTasks, setFilteredTasks] = useState([]);
-  const [page, setPage] = useState("1")
+  const [page, setPage] = useState("1");
+  const [numActive, setNumActive] = useState(0);
 
   const handleKeyDown = (e) => {
     setTempData(e.target.value);
@@ -35,7 +36,12 @@ function App() {
     } else {
       setTasksCompleted();
     }
-  }, [tasks])
+  }, [tasks]);
+
+  useEffect(() => {
+    let count = tasks.filter(task => task.isActive === true).length;
+    setNumActive(count);
+}, [tasks])
 
   // Show all tasks in the tasks array
   function setTasksAll(e) {
@@ -94,7 +100,7 @@ function App() {
     <div id="main-container">
       <Task placeholder={taskPlaceholder.text} handleKeyDown={handleKeyDown} />
       <Tasklist filteredTasks={filteredTasks} deleteTask={deleteTask} markComplete={markComplete}/>
-      <Footer count={`${tasks.length} items left`} setAll={setTasksAll} setActive={setTasksActive} setComplete={setTasksCompleted} clearCompleted={clearCompleted}/>
+      <Footer count={`${numActive} items left to complete`} setAll={setTasksAll} setActive={setTasksActive} setComplete={setTasksCompleted} clearCompleted={clearCompleted}/>
     </div>
     </div>
   );
