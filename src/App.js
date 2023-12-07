@@ -3,7 +3,6 @@ import Task from './routes/Task';
 import Footer from './routes/Footer';
 import { useState, useEffect } from 'react';
 import Tasklist from './routes/Tasklist';
-import * as dayjs from 'dayjs';
 
 function App() {
   
@@ -29,7 +28,7 @@ function App() {
         text : tempData,
         id : Date.now(),
         isActive : true,
-        reminder: ""
+        reminder: false,
       }
       let tempTasks = [...tasks, task];
       setTasks(tempTasks);
@@ -105,6 +104,8 @@ function App() {
     console.log("All completed tasks have been cleared")
   }
 
+ 
+  
   return (
     <div className='container-fluid'>
     <Heading title="TODOS"/>
