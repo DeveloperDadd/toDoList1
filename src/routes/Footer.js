@@ -2,6 +2,7 @@ import React from 'react';
 
 export default function Footer({ count, clearCompleted, setAll, setActive, setComplete }) {
     return(
+    <div className='container-fluid'>
     <div className='row my-4'>
     <div className='col-2'>
     <p className='col-xs-2 text-center'>{count}</p>
@@ -18,6 +19,7 @@ export default function Footer({ count, clearCompleted, setAll, setActive, setCo
     <div className='col-2'>
     <button onClick={clearCompleted} className='btn btn-danger btn-sm col-xs-4'>Clear Completed</button>
     </div>     
+    </div>
     </div>
     )
 }
